@@ -1,0 +1,34 @@
+
+<html>
+  <head>
+    <title>Metamask Authentication</title>
+
+	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+  </head>
+
+  <body>
+    Name: <input type="text" id="myText" placeholder="Enter your name.....">
+	<button onclick="login()">Login with Metamask</button>
+
+	<script>
+        //moralis.io logged in with my account suryau@quaticstech.in
+		Moralis.initialize("afEyiuTVJmgnKTRYpmjegAWA3kxLYtVod0PWgaPg"); // Application id from moralis.io
+		Moralis.serverURL = "https://bqdq6mxbevbb.usemoralis.com:2053/server"; //Server url from moralis.io
+	
+		async function login(){
+			console.log("login clicked");
+            let nickname = document.getElementById("myText").value
+            console.log(nickname)
+			var user = await Moralis.Web3.authenticate();
+			if(user){
+				console.log(user);
+				user.set("nickname",nickname);
+				user.save();
+                //data will be add to data base with nickname
+			}
+		}
+	
+	</script>
+  </body>
+</html>
